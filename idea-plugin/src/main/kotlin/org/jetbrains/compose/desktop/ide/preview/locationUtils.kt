@@ -34,11 +34,15 @@ import org.jetbrains.kotlin.psi.psiUtil.containingClass
 
 internal const val DESKTOP_PREVIEW_ANNOTATION_FQN =
     "androidx.compose.desktop.ui.tooling.preview.Preview"
+internal const val COMMON_PREVIEW_ANNOTATION_FQN =
+    "org.jetbrains.compose.ui.tooling.preview.CommonPreview"
 internal const val COMPOSABLE_FQ_NAME = "androidx.compose.runtime.Composable"
 
 private val ComposableAnnotationClassId = ClassId.topLevel(FqName(COMPOSABLE_FQ_NAME))
 private val DesktopPreviewAnnotationClassId =
     ClassId.topLevel(FqName(DESKTOP_PREVIEW_ANNOTATION_FQN))
+private val CommonPreviewAnnotationClassId =
+    ClassId.topLevel(FqName(COMMON_PREVIEW_ANNOTATION_FQN))
 
 /**
  * Utils based on functions from AOSP, taken from
@@ -112,7 +116,7 @@ internal fun KtNamedFunction.isValidComposablePreviewFunction(): Boolean {
             val mySymbol = symbol
             val hasComposableAnnotation = mySymbol.annotations.contains(ComposableAnnotationClassId)
             val hasPreviewAnnotation =
-                mySymbol.annotations.contains(DesktopPreviewAnnotationClassId)
+                mySymbol.annotations.contains(DesktopPreviewAnnotationClassId) || mySymbol.annotations.contains(CommonPreviewAnnotationClassId)
 
             return hasComposableAnnotation && hasPreviewAnnotation
         }
