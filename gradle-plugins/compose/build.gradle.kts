@@ -63,7 +63,8 @@ dependencies {
 
     compileOnly(gradleApi())
     compileOnly(localGroovy())
-    compileOnly(kotlin("gradle-plugin", kgpResourcesDevVersion))
+    // compileOnly(kotlin("gradle-plugin", kgpResourcesDevVersion))
+    compileOnly(kotlin("gradle-plugin"))
     compileOnly(kotlin("native-utils"))
     compileOnly(libs.plugin.android)
     compileOnly(libs.plugin.android.api)
